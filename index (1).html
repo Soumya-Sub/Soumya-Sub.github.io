@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soumya Subhankar — Senior Business Consultant</title>
+<meta name="description" content="Soumya Subhankar, Senior Business Consultant — digital infrastructure, airport technology, and enterprise strategy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D0D0D;
+    --ink-2:#161819;
+    --paper:#F3F5F9;
+    --paper-2:#F2F2F0;
+    --brass:#5B6E74;
+    --brass-light:#A9BEC4;
+    --steel:#819FA7;
+    --line:rgba(13,13,13,0.12);
+    --line-dark:rgba(255,255,255,0.14);
+    --paper-text:#3D4447;
+    --serif: 'Fraunces', serif;
+    --sans: 'Public Sans', sans-serif;
+    --maxw: 1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink-2);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,244,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:18px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-name{
+    font-family:var(--serif); font-weight:600; font-size:1.05rem;
+    letter-spacing:0.01em;
+  }
+  nav.links{display:flex; gap:28px;}
+  nav.links a{
+    font-size:0.92rem; text-decoration:none; color:var(--ink-2);
+    position:relative; padding-bottom:3px;
+  }
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--brass); transition:width 0.25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:none; cursor:pointer; padding:4px;}
+  .nav-toggle span{display:block; width:22px; height:2px; background:var(--ink-2); margin:5px 0;}
+
+  @media (max-width:760px){
+    nav.links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); flex-direction:column; gap:0;
+      border-bottom:1px solid var(--line);
+      max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+    }
+    nav.links.open{max-height:320px;}
+    nav.links a{padding:14px 32px; border-top:1px solid var(--line);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:88px 0 0 0;
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 32px 64px;
+  }
+  .eyebrow-tag{
+    font-size:0.82rem; color:var(--brass-light); font-weight:500;
+    margin-bottom:20px; letter-spacing:0.02em;
+  }
+  h1.hero-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    line-height:1.15;
+    margin:0 0 22px 0;
+    max-width:15ch;
+    opacity:0;
+    animation:riseIn 0.8s ease-out 0.15s forwards;
+  }
+  .hero-sub{
+    font-size:1.08rem;
+    color:#C7CEDA;
+    max-width:56ch;
+    margin:0 0 40px 0;
+    opacity:0;
+    animation:riseIn 0.8s ease-out 0.35s forwards;
+  }
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* Departures-board stat bar */
+  .board{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line-dark);
+    border-bottom:1px solid var(--line-dark);
+    opacity:0;
+    animation:riseIn 0.8s ease-out 0.55s forwards;
+  }
+  .board-cell{
+    padding:22px 20px;
+    border-right:1px solid var(--line-dark);
+  }
+  .board-cell:last-child{border-right:none;}
+  .board-num{
+    font-family:var(--sans);
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+    font-size:clamp(1.3rem, 3vw, 1.9rem);
+    color:var(--brass-light);
+    letter-spacing:0.02em;
+  }
+  .board-label{
+    font-size:0.78rem;
+    color:#9AA5B5;
+    margin-top:6px;
+    line-height:1.35;
+  }
+  @media (max-width:700px){
+    .board{grid-template-columns:repeat(2,1fr);}
+    .board-cell:nth-child(2){border-right:none;}
+    .board-cell{border-bottom:1px solid var(--line-dark);}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:76px 0;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:40px; gap:20px; flex-wrap:wrap;
+  }
+  h2.section-title{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(1.5rem, 3vw, 2rem);
+    margin:0;
+  }
+  .section-index{
+    font-family:var(--sans); font-variant-numeric:tabular-nums;
+    color:var(--brass); font-weight:600; font-size:0.95rem;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.4fr 1fr; gap:56px; align-items:start;
+  }
+  .about-text p{font-size:1.02rem; color:var(--paper-text); margin:0 0 18px 0; max-width:62ch;}
+  .about-text p:last-child{margin-bottom:0;}
+
+  .photo-frame{
+    aspect-ratio:4/5;
+    border:1px solid var(--line);
+    background:var(--paper-2);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative;
+    padding:24px;
+    text-align:center;
+  }
+  .photo-frame::before{
+    content:''; position:absolute; inset:12px; border:1px solid var(--line);
+  }
+  .monogram{
+    font-family:var(--serif); font-size:3.2rem; font-weight:500;
+    color:var(--ink); margin-bottom:14px;
+  }
+  .photo-frame .note{font-size:0.82rem; color:#8A8272; max-width:22ch;}
+
+  /* ---------- Experience (ledger) ---------- */
+  .role{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:28px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .role:last-child{border-bottom:1px solid var(--line);}
+  .role-meta{color:#7A7364; font-size:0.9rem;}
+  .role-meta .dates{font-variant-numeric:tabular-nums; display:block; margin-bottom:4px;}
+  .role-title{
+    font-family:var(--serif); font-weight:600; font-size:1.15rem; margin:0 0 3px 0;
+  }
+  .role-company{font-size:0.95rem; color:var(--steel); margin:0 0 14px 0; font-weight:600;}
+  .role ul{margin:0; padding-left:18px; color:var(--paper-text);}
+  .role li{margin-bottom:8px; font-size:0.98rem;}
+  .role li:last-child{margin-bottom:0;}
+
+  @media (max-width:700px){
+    .role{grid-template-columns:1fr; gap:8px;}
+  }
+
+  /* ---------- Projects (manifest) ---------- */
+  .manifest{border-top:1px solid var(--line);}
+  .manifest-row{
+    display:grid;
+    grid-template-columns:1fr 1.6fr;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .manifest-client{
+    font-family:var(--serif); font-weight:600; font-size:1.05rem;
+  }
+  .manifest-role{
+    font-size:0.85rem; color:var(--brass); margin-top:4px; font-weight:600;
+  }
+  .manifest-body p{margin:0; font-size:0.95rem; color:var(--paper-text);}
+  .manifest-body p + p{margin-top:8px;}
+
+  @media (max-width:700px){
+    .manifest-row{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:32px;
+  }
+  .skill-group h3{
+    font-family:var(--sans); font-size:0.85rem; font-weight:700;
+    color:var(--steel); margin:0 0 14px 0;
+    padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .skill-group ul{list-style:none; margin:0; padding:0;}
+  .skill-group li{
+    font-size:0.92rem; color:var(--paper-text); padding:6px 0;
+  }
+  @media (max-width:850px){
+    .skills-grid{grid-template-columns:repeat(2,1fr); row-gap:34px;}
+  }
+
+  /* ---------- Education ---------- */
+  .edu-row{
+    display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    padding:22px 0; border-top:1px solid var(--line);
+  }
+  .edu-row:last-child{border-bottom:1px solid var(--line);}
+  .edu-school{font-family:var(--serif); font-weight:600; font-size:1.05rem;}
+  .edu-degree{font-size:0.92rem; color:var(--paper-text); margin-top:3px;}
+  .edu-year{font-variant-numeric:tabular-nums; color:#7A7364; font-size:0.9rem; white-space:nowrap;}
+
+  /* ---------- Contact / Footer ---------- */
+  footer.contact{
+    background:var(--ink); color:var(--paper); padding:76px 0 40px;
+  }
+  .contact-inner{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  h2.contact-title{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(1.7rem, 4vw, 2.4rem);
+    margin:0 0 16px 0; max-width:16ch;
+  }
+  .contact-sub{color:#C7CEDA; max-width:52ch; margin-bottom:44px; font-size:1.02rem;}
+  .contact-links{
+    display:flex; gap:48px; flex-wrap:wrap; margin-bottom:56px;
+  }
+  .contact-link{text-decoration:none; display:block;}
+  .contact-link .label{font-size:0.78rem; color:#8FA0BA; margin-bottom:6px;}
+  .contact-link .value{
+    font-family:var(--serif); font-size:1.25rem; color:var(--paper);
+    border-bottom:1px solid transparent; transition:border-color 0.2s ease;
+  }
+  .contact-link:hover .value{border-color:var(--brass-light);}
+  .footer-bottom{
+    border-top:1px solid var(--line-dark); padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.82rem; color:#7C879B;
+  }
+
+  @media (max-width:700px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-grid .photo-frame{order:-1; max-width:280px;}
+    .skills-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-inner">
+    <div class="nav-name">Soumya Subhankar</div>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-tag">Senior Business Consultant</div>
+    <h1 class="hero-title">Turning complex infrastructure problems into decisions leadership can act on.</h1>
+    <p class="hero-sub">7+ years advising executives and government authorities across airport technology, financial services, enterprise SaaS, and retail — structuring ambiguity into strategy, proposals, and results.</p>
+    <div class="board">
+      <div class="board-cell">
+        <div class="board-num">₹13.5+ Cr</div>
+        <div class="board-label">ARR driven across four enterprise platforms</div>
+      </div>
+      <div class="board-cell">
+        <div class="board-num">₹65+ Cr</div>
+        <div class="board-label">in contracts secured through bid &amp; proposal leadership</div>
+      </div>
+      <div class="board-cell">
+        <div class="board-num">₹500+ Cr</div>
+        <div class="board-label">active pipeline across airport modernization programs</div>
+      </div>
+      <div class="board-cell">
+        <div class="board-num">20+</div>
+        <div class="board-label">airports advised across India, Europe, the Middle East &amp; Africa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">About</h2>
+      <span class="section-index">01</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a business consultant based in Gurgaon, working at the intersection of strategy, technology, and execution. My work sits across digital infrastructure, airport technology, financial services, enterprise SaaS, communications, retail, hospitality, and real estate — wherever a business needs to turn ambiguous problems into a clear, fundable plan.</p>
+        <p>Day to day, that means market research and competitive analysis, structuring proposals and RFP responses, building the business case that gets a project greenlit, and standing in front of C-suite stakeholders to make the recommendation land. I care as much about the narrative as the numbers — a good strategy that nobody acts on hasn't done its job.</p>
+        <p>Outside of client work, I volunteer as a tutor at a village school near my hometown, help coordinate community food drives, and spend weekends on landscape photography. I also make a point of travelling whenever I can — new places and unfamiliar cultures are where I do my best thinking.</p>
+      </div>
+      <div class="photo-frame">
+        <div class="monogram">SS</div>
+        <div class="note">Professional headshot coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Experience</h2>
+      <span class="section-index">02</span>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Apr 2024 — Present</span>Gurgaon, Haryana</div>
+      <div>
+        <h3 class="role-title">Senior Business Consultant</h3>
+        <p class="role-company">CorePeelers Pvt Ltd</p>
+        <ul>
+          <li>Partnered with executive leadership to shape business strategy, product vision, and market expansion across airport technology, enterprise SaaS, and fintech verticals.</li>
+          <li>Spearheaded go-to-market strategy and product roadmaps for four enterprise platforms, driving ₹13.5+ Cr in ARR and a 15% market share increase.</li>
+          <li>Led bid management and technical-commercial strategy for 20+ international proposals and RFPs, securing contract awards exceeding ₹65 Cr.</li>
+          <li>Qualified and structured strategic pursuits for large-scale airport modernization programs, managing an active deal pipeline of ₹500+ Cr.</li>
+          <li>Advised C-suite stakeholders and government authorities on digital transformation across 20+ airports in India, Europe, the Middle East, and Africa.</li>
+          <li>Modernized enterprise financial systems used by 100+ corporate clients, cutting processing turnaround time by 40%.</li>
+          <li>Integrated AI-assisted research and workflows into market intelligence and proposal development, accelerating response times and strategy formulation.</li>
+          <li>Owns full project P&amp;L — budgeting, cost estimation, actuals tracking, forecasting, and variance analysis — for enterprise programs and commercial commitments.</li>
+          <li>Manages vendor relationships and contract ownership, including scope, deliverables, commercials, and delivery obligations.</li>
+          <li>Authors and owns BRDs, FRDs, SRS, user stories, use cases, and process/UML/data-flow diagrams; assesses change requests for impact on timeline, resources, and budget.</li>
+          <li>Leads UAT end-to-end across business, development, and QA teams through defect resolution and sign-off; drives deployment, go-live, and post-go-live support.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Jan 2023 — Mar 2024</span>Gurgaon, Haryana</div>
+      <div>
+        <h3 class="role-title">Business Consultant</h3>
+        <p class="role-company">CorePeelers Pvt Ltd</p>
+        <ul>
+          <li>Conducted market research and competitive analysis across multiple industries to identify trends and opportunities informing product strategy.</li>
+          <li>Synthesized market, operational, and customer data into actionable insight for client decisions on process, technology, and growth.</li>
+          <li>Developed executive presentations, business cases, and client-facing proposals translating technical capability into clear business value.</li>
+          <li>Facilitated stakeholder workshops and discovery sessions to validate assumptions and structure recommendations for senior decision-makers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Mar 2021 — Oct 2022</span>Gurgaon, Haryana</div>
+      <div>
+        <h3 class="role-title">Analyst</h3>
+        <p class="role-company">Better.com</p>
+        <ul>
+          <li>Analyzed operational and customer datasets to generate insight for executive leadership, supporting weekly and monthly business reviews.</li>
+          <li>Built reporting frameworks, dashboards, and SOPs using Looker, Jira, and Monday.com to improve visibility and process compliance.</li>
+          <li>Resolved escalations proactively while maintaining a 98% customer satisfaction rate.</li>
+          <li>Onboarded and trained more than 35 new hires and four managers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Dec 2020 — Feb 2021</span>New Delhi</div>
+      <div>
+        <h3 class="role-title">Assistant Manager</h3>
+        <p class="role-company">Gupshup Technology</p>
+        <ul>
+          <li>Assessed customer requirements and recommended tailored features that increased satisfaction and profitability.</li>
+          <li>Developed and presented proposals and RFP responses addressing specific customer needs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Feb 2020 — Dec 2020</span>Gurgaon, Haryana</div>
+      <div>
+        <h3 class="role-title">Sales Specialist</h3>
+        <p class="role-company">Majorel India (Microsoft)</p>
+        <ul>
+          <li>Achieved average monthly sales of USD 70,000 managing enterprise customer accounts.</li>
+          <li>Built partner relationships driving promotion of Microsoft cloud solutions, particularly Azure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-meta"><span class="dates">Mar 2019 — Dec 2019</span>Hyderabad</div>
+      <div>
+        <h3 class="role-title">Technical Sales Manager</h3>
+        <p class="role-company">Pi Datacenters Pvt Ltd</p>
+        <ul>
+          <li>Drove business development for a cloud platform across Telangana, Andhra Pradesh, Karnataka, and Odisha, generating ₹0.9 Cr in six months.</li>
+          <li>Managed the sales pipeline, identifying and qualifying high-value opportunities aligned with client needs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Selected projects</h2>
+      <span class="section-index">03</span>
+    </div>
+    <div class="manifest">
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">Navi Mumbai International Airport</div>
+          <div class="manifest-role">Master systems integration &amp; digital platforms</div>
+        </div>
+        <div class="manifest-body">
+          <p>Led MSI solution strategy and proposal development for a greenfield airport targeting 20M+ passengers in Phase 1.</p>
+          <p>Architected deployment strategies for two proprietary platforms, NexxMessage and RevNexx, coordinating airport leadership, OEMs, and technology teams.</p>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">New Heraklion International Airport, Crete</div>
+          <div class="manifest-role">MSI &amp; airport design consultancy</div>
+        </div>
+        <div class="manifest-body">
+          <p>Led business consulting, proposal strategy, and systems design for a €500M+ greenfield airport development, designed for approximately 8M passengers annually.</p>
+          <p>Managed international stakeholders and cross-functional engineering teams across operational and technology planning.</p>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">Ninoy Aquino International Airport, Philippines</div>
+          <div class="manifest-role">Airport commercial &amp; revenue systems</div>
+        </div>
+        <div class="manifest-body">
+          <p>Led solution consulting and deployment planning for AeroBilling, an enterprise billing and revenue management platform.</p>
+          <p>Designed workflows to streamline airport billing, reconciliation, and settlement processes.</p>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">McDonald's India</div>
+          <div class="manifest-role">Lean process transformation &amp; financial systems</div>
+        </div>
+        <div class="manifest-body">
+          <p>Executed Lean assessments across corporate finance operations to eliminate bottlenecks and reduce overhead.</p>
+          <p>Built an automated financial reconciliation system bridging operational and digital workflows.</p>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">Subway India</div>
+          <div class="manifest-role">Financial reconciliation platform</div>
+        </div>
+        <div class="manifest-body">
+          <p>Led business architecture and requirements for a multi-unit financial reconciliation platform.</p>
+          <p>Designed workflows to strengthen financial controls and streamline franchise reporting.</p>
+        </div>
+      </div>
+      <div class="manifest-row">
+        <div>
+          <div class="manifest-client">Keventers</div>
+          <div class="manifest-role">Enterprise expense management platform</div>
+        </div>
+        <div class="manifest-body">
+          <p>Owned product vision, business architecture, and execution for a multi-location expense management platform.</p>
+          <p>Reduced internal processing turnaround time by 40% through workflow digitisation and automation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Skills</h2>
+      <span class="section-index">04</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Strategy &amp; growth</h3>
+        <ul>
+          <li>Business strategy &amp; planning</li>
+          <li>Product strategy &amp; management</li>
+          <li>Go-to-market strategy</li>
+          <li>Business process re-engineering</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Research &amp; intelligence</h3>
+        <ul>
+          <li>Business intelligence &amp; data analysis</li>
+          <li>Market research &amp; competitive analysis</li>
+          <li>Market analysis</li>
+          <li>AI-assisted research &amp; automation</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Client &amp; stakeholder</h3>
+        <ul>
+          <li>Stakeholder management</li>
+          <li>Customer success &amp; accounts</li>
+          <li>Training &amp; mentoring</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Delivery &amp; execution</h3>
+        <ul>
+          <li>Executive presentation &amp; storytelling</li>
+          <li>Proposal development &amp; RFP management</li>
+          <li>Project &amp; budget planning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Education</h2>
+      <span class="section-index">05</span>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-school">Birla Institute of Management Technology, Greater Noida</div>
+        <div class="edu-degree">MBA, Marketing</div>
+      </div>
+      <div class="edu-year">2019</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-school">Ravenshaw University, Cuttack</div>
+        <div class="edu-degree">B.Com (Hons), Marketing</div>
+      </div>
+      <div class="edu-year">2017</div>
+    </div>
+  </div>
+</section>
+
+<footer class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">Let's talk about your next initiative.</h2>
+    <p class="contact-sub">Open to consulting engagements, advisory roles, and conversations about digital infrastructure and enterprise strategy.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="tel:+918700478736">
+        <div class="label">Phone</div>
+        <div class="value">+91 87004 78736</div>
+      </a>
+      <a class="contact-link" href="mailto:master.soumya34@gmail.com">
+        <div class="label">Email</div>
+        <div class="value">master.soumya34@gmail.com</div>
+      </a>
+      <div class="contact-link">
+        <div class="label">Location</div>
+        <div class="value">Gurgaon, Haryana</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Soumya Subhankar</span>
+      <span>Business Consultant · Digital Infrastructure &amp; Strategy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
